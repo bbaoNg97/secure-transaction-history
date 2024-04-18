@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "amount": 2202.58,
+    "date": "2024-04-18T08:57:07.722Z",
+    "description": "Transaction 0",
+    "type": "CREDIT"
+  },
+  {
+    "id": 2,
+    "amount": 9017.79,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 1",
+    "type": "DEBIT"
+  },
+  {
+    "id": 3,
+    "amount": 4856.75,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 2",
+    "type": "CREDIT"
+  },
+  {
+    "id": 4,
+    "amount": 2749.33,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 3",
+    "type": "DEBIT"
+  },
+  {
+    "id": 5,
+    "amount": 6371.86,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 4",
+    "type": "CREDIT"
+  },
+  {
+    "id": 6,
+    "amount": 5714.61,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 5",
+    "type": "DEBIT"
+  },
+  {
+    "id": 7,
+    "amount": 5291.75,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 6",
+    "type": "CREDIT"
+  },
+  {
+    "id": 8,
+    "amount": 8192.2,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 7",
+    "type": "DEBIT"
+  },
+  {
+    "id": 9,
+    "amount": 4388.23,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 8",
+    "type": "CREDIT"
+  },
+  {
+    "id": 10,
+    "amount": 9721.83,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 9",
+    "type": "DEBIT"
+  },
+  {
+    "id": 11,
+    "amount": 6283.61,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 10",
+    "type": "CREDIT"
+  },
+  {
+    "id": 12,
+    "amount": 4609.02,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 11",
+    "type": "DEBIT"
+  },
+  {
+    "id": 13,
+    "amount": 6724.15,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 12",
+    "type": "CREDIT"
+  },
+  {
+    "id": 14,
+    "amount": 6507.48,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 13",
+    "type": "DEBIT"
+  },
+  {
+    "id": 15,
+    "amount": 1823.79,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 14",
+    "type": "CREDIT"
+  },
+  {
+    "id": 16,
+    "amount": 1004.53,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 15",
+    "type": "DEBIT"
+  },
+  {
+    "id": 17,
+    "amount": 8391.61,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 16",
+    "type": "CREDIT"
+  },
+  {
+    "id": 18,
+    "amount": 2174.63,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 17",
+    "type": "DEBIT"
+  },
+  {
+    "id": 19,
+    "amount": 4663.35,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 18",
+    "type": "CREDIT"
+  },
+  {
+    "id": 20,
+    "amount": 5677.81,
+    "date": "2024-04-18T08:57:07.723Z",
+    "description": "Transaction 19",
+    "type": "DEBIT"
+  }
+]

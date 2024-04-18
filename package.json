@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "npm run generate-sample; expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "generate-sample": "ts-node src/scripts/generateSampleTransactions.ts"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.17",
