@@ -12,6 +12,7 @@ export const TransactionDetailsScreen = ({ route }: Navigation.RootStackScreenPr
 const style = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center'
     }

@@ -11,7 +11,7 @@ declare global {
 declare namespace Navigation {
   type RootStackParamList = {
     TransactionHistory: undefined;
-    TransactionDetails: { transactionId: string };
+    TransactionDetails: { transactionId: number };
   };
 
   type RootStackScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;

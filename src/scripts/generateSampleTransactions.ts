@@ -7,7 +7,7 @@ function generateSampleTransactions(total: number) {
             id: i + 1,
             amount: parseFloat((Math.random() * 10000).toFixed(2)),
             date: new Date().toISOString(),
-            description: `Transaction ${i}`,
+            description: `Transaction ${i + 1}`,
             type: i % 2 === 0 ? 'CREDIT' : 'DEBIT'
         };
 
