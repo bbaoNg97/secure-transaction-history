@@ -1,0 +1,22 @@
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+
+import { Navigation } from './typings/navigation';
+import { TransactionsHistoryScreen } from './ui/TransactionHistoryScreen';
+import { TransactionDetailsScreen } from './ui/TransactionDetailsScreen';
+
+const Stack = createNativeStackNavigator<Navigation.RootStackParamList>();
+
+const RootNavigator = (): JSX.Element => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="TransactionHistory" component={TransactionsHistoryScreen} />
+        <Stack.Screen name="TransactionDetails" component={TransactionDetailsScreen} options={{ headerBackTitleVisible: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default RootNavigator;

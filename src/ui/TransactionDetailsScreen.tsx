@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet } from "react-native"
+import { Navigation } from "../typings/navigation"
 
-export const TransactionDetails = () => {
+export const TransactionDetailsScreen = ({ route }: Navigation.RootStackScreenProps<'TransactionDetails'>) => {
     return (
         <View style={style.container}>
-            <Text>Transaction History Screen</Text>
+            <Text>Transaction History Screen with id {route.params.transactionId}</Text>
         </View>
     )
 }
