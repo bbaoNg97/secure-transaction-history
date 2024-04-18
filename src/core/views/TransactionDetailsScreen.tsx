@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native"
-import { Navigation } from "../typings/navigation"
+import { Navigation } from "../../typings/navigation"
 
 export const TransactionDetailsScreen = ({ route }: Navigation.RootStackScreenProps<'TransactionDetails'>) => {
     return (

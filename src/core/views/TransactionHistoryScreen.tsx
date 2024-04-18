@@ -1,8 +1,7 @@
 import { View, Text, StyleSheet, Button } from "react-native"
-import { Navigation } from "../typings/navigation"
+import { Navigation } from "../../typings/navigation"
 
 export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackScreenProps<'TransactionHistory'>) => {
-
     const handlePress = () => {
         navigation.navigate('TransactionDetails', { transactionId: '123' });
     };
