@@ -14,8 +14,15 @@ const RootNavigator = (): JSX.Element => {
     <NavigationContainer>
       <StatusBar style="auto" />
       <Stack.Navigator>
-        <Stack.Screen name="TransactionHistory" component={TransactionsHistoryScreen} />
-        <Stack.Screen name="TransactionDetails" component={TransactionDetailsScreen} options={{ headerBackTitleVisible: false }} />
+        <Stack.Screen name="TransactionHistory" component={TransactionsHistoryScreen}
+          options={{
+            title: "History"
+          }} />
+        <Stack.Screen name="TransactionDetails" component={TransactionDetailsScreen}
+          options={{
+            headerBackTitleVisible: false,
+            title: "Details"
+          }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
