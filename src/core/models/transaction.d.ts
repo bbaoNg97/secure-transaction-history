@@ -11,6 +11,6 @@ declare namespace Transaction {
     amount: number;
     date: string;
     description: string;
-    type: TransactionType;
+    type: string | TransactionType;
   }
 }

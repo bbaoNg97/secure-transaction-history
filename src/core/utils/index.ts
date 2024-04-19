@@ -1,23 +1,23 @@
 import moment from 'moment';
 
-  /**
-   * Format a date in ISO String to the format DD MMM YYYY.
-   * @param isoDate date in ISO String
-   * @returns DDMMYYYY
-   **/
+/**
+ * Format a date to the format DD MMM YYYY.
+ * @param date
+ * @returns DDMMYYYY
+ **/
 export function formatDateToDDMMYYYY(isoDate: string) {
     const date = moment(isoDate);
     return date.format('DD MMM YYYY');
 }
 
 /**
-* Format a date in ISO String to the format DD MMM YYYY, HH:mm A.
-* @param isoDate date in ISO String
-* @returns DD MMM YYYY, HH:mm A
+* Format a date to the format DD MMM YYYY, hh:mm A.
+* @param date
+* @returns DD MMM YYYY, hh:mm A
 **/
 export function formatDate(isoDate: string) {
     const date = moment(isoDate);
-    return date.format('DD MMM YYYY, HH:mm A');
+    return date.format('DD MMM YYYY, hh:mm A');
 }
 
 export function formatAmountWithDecimals(amount: number) {
