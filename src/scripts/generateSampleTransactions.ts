@@ -1,11 +1,19 @@
 import fs from 'fs';
 
+// Generate a random amount with fixed decimal points.
+function generateRandomAmount(): number {
+    const minAmount = 0;
+    const maxAmount = 9999;
+    const randomAmount = Math.random() * (maxAmount - minAmount) + minAmount;
+    return parseFloat(randomAmount.toFixed(2));
+}
+
 function generateSampleTransactions(total: number) {
     const transactions = [];
     for (let i = 0; i < total; i++) {
         const transactionData = {
-            id: i + 1,
-            amount: parseFloat((Math.random() * 10000).toFixed(2)),
+            id: `trx-${(i + 1).toLocaleString('en-US', { minimumIntegerDigits: 2 })}`,
+            amount: generateRandomAmount(),
             date: new Date().toISOString(),
             description: `Transaction ${i + 1}`,
             type: i % 2 === 0 ? 'CREDIT' : 'DEBIT'
