@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
-import { convertToDDMMMYYYY, formatAmountWithCommas } from "../utils";
+import { formatDateToDDMMYYYY, formatAmountWithDecimals } from "../utils";
 
 interface HistoryListItemProps {
     transaction: Transaction.Data;
@@ -12,14 +12,14 @@ export const HistoryListItem = (props: HistoryListItemProps) => {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
             <View style={styles.wrapper}>
-                <Text style={styles.date}>{convertToDDMMMYYYY(transaction.date)}</Text>
+                <Text style={styles.date}>{formatDateToDDMMYYYY(transaction.date)}</Text>
                 <Text style={styles.description}>{transaction.description}</Text>
             </View>
             <View style={styles.amountWrapper}>
                 {transaction.type === 'CREDIT' ?
-                    <Text style={styles.creditAmount}>-RM{formatAmountWithCommas(transaction.amount)}</Text>
+                    <Text style={styles.creditAmount}>-RM{formatAmountWithDecimals(transaction.amount)}</Text>
                     :
-                    <Text style={styles.debitAmount}>+RM{formatAmountWithCommas(transaction.amount)}</Text>
+                    <Text style={styles.debitAmount}>+RM{formatAmountWithDecimals(transaction.amount)}</Text>
                 }
 
             </View>
