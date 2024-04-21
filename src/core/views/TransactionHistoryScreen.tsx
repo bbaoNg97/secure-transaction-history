@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, SafeAreaView, RefreshControl } from "react-native"
+import { StyleSheet, FlatList, SafeAreaView, RefreshControl, Switch, Text, View } from "react-native"
 import { HistoryListItem } from "../components/HistoryListItem";
 import sampleTransactions from '../../../sampleTransactions.json';
 import { Navigation } from "../../typings/navigation";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackScreenProps<'TransactionHistory'>) => {
     const [refreshing, setRefreshing] = useState(false);
     const [transactions, setTransactions] = useState<Transaction.Data[]>([]);
+    const [showAmounts, setShowAmounts] = useState<boolean>(false);
 
     useEffect(() => {
         const sortedTransactions: Transaction.Data[] = sortTransactions(sampleTransactions);
@@ -21,6 +22,10 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
     const handlePress = (selectedTransaction: Transaction.Data) => {
         navigation.navigate('TransactionDetails', { transaction: selectedTransaction });
     };
+
+    const toggleSwitch = () => {
+        setShowAmounts(previousState => !previousState);
+    }
 
     const handleRefresh = () => {
         setRefreshing(true);
@@ -50,6 +55,13 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
 
     return (
         <SafeAreaView style={style.container}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 16, justifyContent: 'flex-end' }}>
+                <Text style={{ marginRight: 8 }}>Show/Hide Amounts</Text>
+                <Switch
+                    onValueChange={toggleSwitch}
+                    value={showAmounts}
+                />
+            </View>
             <FlatList
                 keyExtractor={(item) => item.id}
                 style={{ paddingVertical: 8 }}
@@ -66,6 +78,7 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
                         <HistoryListItem
                             transaction={item as Transaction.Data}
                             onPress={() => handlePress(item as Transaction.Data)}
+                            showAmounts={showAmounts}
                         />
                         {index !== sampleTransactions.length - 1 &&
                             <Separator />

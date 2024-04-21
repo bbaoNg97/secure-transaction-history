@@ -4,10 +4,11 @@ import { formatDateToDDMMYYYY, formatAmountWithDecimals } from "../utils";
 interface HistoryListItemProps {
     transaction: Transaction.Data;
     onPress: () => void;
+    showAmounts: boolean;
 }
 
 export const HistoryListItem = (props: HistoryListItemProps) => {
-    const { transaction, onPress } = props;
+    const { transaction, onPress, showAmounts } = props;
 
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -16,10 +17,12 @@ export const HistoryListItem = (props: HistoryListItemProps) => {
                 <Text style={styles.description}>{transaction.description}</Text>
             </View>
             <View style={styles.amountWrapper}>
-                {transaction.type === 'CREDIT' ?
-                    <Text style={styles.creditAmount}>-RM{formatAmountWithDecimals(transaction.amount)}</Text>
-                    :
-                    <Text style={styles.debitAmount}>+RM{formatAmountWithDecimals(transaction.amount)}</Text>
+                {!showAmounts ?
+                    <Text style={styles.amount}>RM****</Text> :
+                    transaction.type === 'CREDIT' ?
+                        <Text style={[styles.amount, styles.creditAmount]}>-RM{formatAmountWithDecimals(transaction.amount)}</Text>
+                        :
+                        <Text style={[styles.amount, styles.debitAmount]}>+RM{formatAmountWithDecimals(transaction.amount)}</Text>
                 }
 
             </View>
@@ -36,14 +39,14 @@ const styles = StyleSheet.create({
     amountWrapper: {
         alignItems: 'flex-end'
     },
-    creditAmount: {
+    amount: {
         fontSize: 18,
         fontWeight: '500',
+    },
+    creditAmount: {
         color: 'black',
     },
     debitAmount: {
-        fontSize: 18,
-        fontWeight: '500',
         color: 'green',
     },
     wrapper: {
