@@ -4,8 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "npm run generate-sample; expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "generate-sample": "ts-node src/scripts/generateSampleTransactions.ts"
   },
@@ -13,6 +13,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "expo": "~50.0.14",
+    "expo-local-authentication": "~13.8.0",
     "expo-status-bar": "~1.11.1",
     "moment": "^2.30.1",
     "react": "18.2.0",

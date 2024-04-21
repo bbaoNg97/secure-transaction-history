@@ -1,9 +1,11 @@
-import { StyleSheet, FlatList, SafeAreaView, RefreshControl, Switch, Text, View } from "react-native"
+import { StyleSheet, FlatList, SafeAreaView, RefreshControl, Switch, Text, View } from "react-native";
+import * as LocalAuthentication from 'expo-local-authentication';
+import { useEffect, useState } from "react";
+
 import { HistoryListItem } from "../components/HistoryListItem";
 import sampleTransactions from '../../../sampleTransactions.json';
 import { Navigation } from "../../typings/navigation";
 import { Separator } from "../components/Separator";
-import { useEffect, useState } from "react";
 
 export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackScreenProps<'TransactionHistory'>) => {
     const [refreshing, setRefreshing] = useState(false);
@@ -23,8 +25,19 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
         navigation.navigate('TransactionDetails', { transaction: selectedTransaction });
     };
 
-    const toggleSwitch = () => {
-        setShowAmounts(previousState => !previousState);
+    const toggleSwitch = async () => {
+        if (!showAmounts) {
+            const result = await LocalAuthentication.authenticateAsync({
+                promptMessage: 'Enter PIN to continue'
+            });
+
+            if (result.success) {
+                setShowAmounts(true);
+            }
+        } else {
+            setShowAmounts(false);
+        }
+
     }
 
     const handleRefresh = () => {
@@ -73,18 +86,14 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
                         title="Refreshing..."
                     />
                 }
-                renderItem={({ item, index }) =>
-                    <>
-                        <HistoryListItem
-                            transaction={item as Transaction.Data}
-                            onPress={() => handlePress(item as Transaction.Data)}
-                            showAmounts={showAmounts}
-                        />
-                        {index !== sampleTransactions.length - 1 &&
-                            <Separator />
-                        }
-                    </>
+                renderItem={({ item }) =>
+                    <HistoryListItem
+                        transaction={item as Transaction.Data}
+                        onPress={() => handlePress(item as Transaction.Data)}
+                        showAmounts={showAmounts}
+                    />
                 }
+                ItemSeparatorComponent={() => <Separator />}
             />
         </SafeAreaView>
     )

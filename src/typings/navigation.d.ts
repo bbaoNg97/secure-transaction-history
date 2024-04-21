@@ -10,6 +10,7 @@ declare global {
 
 declare namespace Navigation {
   type RootStackParamList = {
+    Authentication: undefined;
     TransactionHistory: undefined;
     TransactionDetails: { transaction: Transaction.Data };
   };
