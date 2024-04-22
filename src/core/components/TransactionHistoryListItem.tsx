@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 
 import { formatDateToDDMMYYYY, formatAmountWithDecimals } from "../utils";
 
@@ -12,7 +12,7 @@ export const TransactionHistoryListItem = (props: TransactionHistoryListItemProp
     const { transaction, onPress, showAmounts } = props;
 
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
+        <Pressable style={styles.container} onPress={onPress}>
             <View style={styles.wrapper}>
                 <Text style={styles.date}>{formatDateToDDMMYYYY(transaction.date)}</Text>
                 <Text style={styles.description}>{transaction.description}</Text>
@@ -25,9 +25,8 @@ export const TransactionHistoryListItem = (props: TransactionHistoryListItemProp
                         :
                         <Text style={[styles.amount, styles.debitAmount]}>+RM{formatAmountWithDecimals(transaction.amount)}</Text>
                 }
-
             </View>
-        </TouchableOpacity>
+        </Pressable>
     )
 }
 
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginHorizontal: 16,
         marginVertical: 8,
+        paddingBottom: 8,
     },
     amountWrapper: {
         alignItems: 'flex-end'

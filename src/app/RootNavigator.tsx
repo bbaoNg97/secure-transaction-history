@@ -13,7 +13,7 @@ import { AuthenticationContext } from '../context/authenticationContext';
 const Stack = createNativeStackNavigator<Navigation.RootStackParamList>();
 
 const RootNavigator = (): JSX.Element => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext) as Authentication.ContextType;
+  const { isAuthenticated, updateAuthentication } = useContext(AuthenticationContext) as Authentication.ContextType;
 
   return (
     <NavigationContainer>
@@ -25,7 +25,7 @@ const RootNavigator = (): JSX.Element => {
               options={{
                 title: "History",
                 headerRight: () => (
-                  <Pressable onPress={() => setIsAuthenticated(false)}>
+                  <Pressable onPress={() => updateAuthentication(false)}>
                     <Text style={styles.buttonText}>Logout</Text>
                   </Pressable>
                 )

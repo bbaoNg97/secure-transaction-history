@@ -26,18 +26,21 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
     };
 
     const toggleSwitch = async () => {
-        if (!showAmounts) {
-            const result = await LocalAuthentication.authenticateAsync({
-                promptMessage: 'Enter PIN to continue'
-            });
+        try {
+            if (!showAmounts) {
+                const result = await LocalAuthentication.authenticateAsync({
+                    promptMessage: 'Enter PIN to continue'
+                });
 
-            if (result.success) {
-                setShowAmounts(true);
+                if (result.success) {
+                    setShowAmounts(true);
+                }
+            } else {
+                setShowAmounts(false);
             }
-        } else {
-            setShowAmounts(false);
+        } catch (e) {
+            console.log('Oops! error:', e);
         }
-
     }
 
     const handleRefresh = () => {
