@@ -12,7 +12,7 @@ declare namespace Navigation {
   type RootStackParamList = {
     Authentication: undefined;
     TransactionHistory: undefined;
-    TransactionDetails: { transaction: Transaction.Data };
+    TransactionDetails: { transaction: Transaction.Response };
   };
 
   type RootStackScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;

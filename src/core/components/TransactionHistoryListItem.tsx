@@ -1,13 +1,14 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+
 import { formatDateToDDMMYYYY, formatAmountWithDecimals } from "../utils";
 
-interface HistoryListItemProps {
-    transaction: Transaction.Data;
+interface TransactionHistoryListItemProps {
+    transaction: Transaction.Response;
     onPress: () => void;
     showAmounts: boolean;
 }
 
-export const HistoryListItem = (props: HistoryListItemProps) => {
+export const TransactionHistoryListItem = (props: TransactionHistoryListItemProps) => {
     const { transaction, onPress, showAmounts } = props;
 
     return (

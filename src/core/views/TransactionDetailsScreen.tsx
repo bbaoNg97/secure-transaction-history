@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet } from "react-native"
-import { Navigation } from "../../typings/navigation"
+import { View, Text, StyleSheet } from "react-native";
+
+import { Navigation } from "../../typings/navigation";
 import { formatAmountWithDecimals, formatDate } from "../utils";
 import { Separator } from "../components/Separator";
 

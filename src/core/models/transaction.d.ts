@@ -1,12 +1,7 @@
 declare namespace Transaction {
-  interface State {
-    selectedTransaction: Data;
-    transactions: Data[];
-  }
-
   type TransactionType = 'DEBIT' | 'CREDIT';
 
-  interface Data {
+  interface Response {
     id: string;
     amount: number;
     date: string;

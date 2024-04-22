@@ -2,26 +2,26 @@ import { StyleSheet, FlatList, SafeAreaView, RefreshControl, Switch, Text, View 
 import * as LocalAuthentication from 'expo-local-authentication';
 import { useEffect, useState } from "react";
 
-import { HistoryListItem } from "../components/HistoryListItem";
+import { TransactionHistoryListItem } from "../components/TransactionHistoryListItem";
 import sampleTransactions from '../../../sampleTransactions.json';
 import { Navigation } from "../../typings/navigation";
 import { Separator } from "../components/Separator";
 
 export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackScreenProps<'TransactionHistory'>) => {
     const [refreshing, setRefreshing] = useState(false);
-    const [transactions, setTransactions] = useState<Transaction.Data[]>([]);
+    const [transactions, setTransactions] = useState<Transaction.Response[]>([]);
     const [showAmounts, setShowAmounts] = useState<boolean>(false);
 
     useEffect(() => {
-        const sortedTransactions: Transaction.Data[] = sortTransactions(sampleTransactions);
+        const sortedTransactions: Transaction.Response[] = sortTransactions(sampleTransactions);
         setTransactions(sortedTransactions);
     }, []);
 
-    const sortTransactions = (transactions: Transaction.Data[]) => {
+    const sortTransactions = (transactions: Transaction.Response[]) => {
         return transactions.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     }
 
-    const handlePress = (selectedTransaction: Transaction.Data) => {
+    const handlePress = (selectedTransaction: Transaction.Response) => {
         navigation.navigate('TransactionDetails', { transaction: selectedTransaction });
     };
 
@@ -45,7 +45,7 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
         setTimeout(() => {
             const hasNewTransaction = Math.random() < 0.5; // 50% chance of new transaction.
             if (hasNewTransaction) {
-                const newTransactions: Transaction.Data[] = [{
+                const newTransactions: Transaction.Response[] = [{
                     id: `trx-${transactions.length + 1}`,
                     amount: 200,
                     date: new Date(new Date().getTime() - 60000).toISOString(), // 1 minitue ago.
@@ -67,9 +67,9 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
     }
 
     return (
-        <SafeAreaView style={style.container}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 16, justifyContent: 'flex-end' }}>
-                <Text style={{ marginRight: 8 }}>Show/Hide Amounts</Text>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.switchContainer}>
+                <Text style={styles.amountText}>Show/Hide Amounts</Text>
                 <Switch
                     onValueChange={toggleSwitch}
                     value={showAmounts}
@@ -77,7 +77,7 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
             </View>
             <FlatList
                 keyExtractor={(item) => item.id}
-                style={{ paddingVertical: 8 }}
+                style={styles.list}
                 data={transactions}
                 refreshControl={
                     <RefreshControl
@@ -87,9 +87,9 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
                     />
                 }
                 renderItem={({ item }) =>
-                    <HistoryListItem
-                        transaction={item as Transaction.Data}
-                        onPress={() => handlePress(item as Transaction.Data)}
+                    <TransactionHistoryListItem
+                        transaction={item as Transaction.Response}
+                        onPress={() => handlePress(item as Transaction.Response)}
                         showAmounts={showAmounts}
                     />
                 }
@@ -99,9 +99,21 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white'
+    },
+    switchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 16,
+        justifyContent: 'flex-end'
+    },
+    amountText: {
+        marginRight: 8.
+    },
+    list: {
+        paddingVertical: 8,
     }
 });
