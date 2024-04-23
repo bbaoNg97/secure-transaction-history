@@ -1,11 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
+import { RouteProp } from "@react-navigation/native";
 
 import { Navigation } from "../../typings/navigation";
 import { formatAmountWithDecimals, formatDate } from "../utils";
 import { Separator } from "../components/Separator";
+import { TransactionDetailItem } from "../components/TransactionDetailItem";
 
-export const TransactionDetailsScreen = ({ route }: Navigation.RootStackScreenProps<'TransactionDetails'>) => {
-    const { transaction } = route.params;
+interface TransactionDetailsScreenProps extends Navigation.RootStackScreenProps<'TransactionDetails'> {
+    route: RouteProp<Navigation.RootStackParamList, "TransactionDetails">;
+}
+
+export const TransactionDetailsScreen = (props: TransactionDetailsScreenProps) => {
+    const { transaction } = props.route.params;
 
     return (
         <View style={styles.container}>
@@ -18,20 +24,20 @@ export const TransactionDetailsScreen = ({ route }: Navigation.RootStackScreenPr
             </View>
 
             <View style={styles.contentContainer}>
-                <View style={styles.titleDescriptionContainer}>
-                    <Text style={styles.title}>Date & Time</Text>
-                    <Text style={styles.description}>{formatDate(transaction.date)}</Text>
-                </View>
+                <TransactionDetailItem
+                    title={'Date & Time'}
+                    value={formatDate(transaction.date)}
+                />
                 <Separator />
-                <View style={styles.titleDescriptionContainer}>
-                    <Text style={styles.title}>Transaction ID</Text>
-                    <Text style={styles.description}>{transaction.id}</Text>
-                </View>
+                <TransactionDetailItem
+                    title={'Transaction ID'}
+                    value={transaction.id}
+                />
                 <Separator />
-                <View style={styles.titleDescriptionContainer}>
-                    <Text style={styles.title}>Description </Text>
-                    <Text style={styles.description}>{transaction.description}</Text>
-                </View>
+                <TransactionDetailItem
+                    title={'Description'}
+                    value={transaction.description}
+                />
             </View>
 
         </View>
@@ -53,16 +59,5 @@ const styles = StyleSheet.create({
     contentContainer: {
         paddingHorizontal: 16,
         backgroundColor: 'white',
-
-    },
-    titleDescriptionContainer: {
-        marginVertical: 16,
-    },
-    title: {
-        fontSize: 12,
-        fontWeight: '300'
-    },
-    description: {
-        fontSize: 18,
     }
 })

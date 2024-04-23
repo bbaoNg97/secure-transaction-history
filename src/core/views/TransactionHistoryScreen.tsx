@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, SafeAreaView, RefreshControl, Switch, Text, View } from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, RefreshControl, Switch, Text, View, ListRenderItem } from "react-native";
 import * as LocalAuthentication from 'expo-local-authentication';
 import { useEffect, useState } from "react";
 
@@ -6,8 +6,15 @@ import { TransactionHistoryListItem } from "../components/TransactionHistoryList
 import sampleTransactions from '../../../sampleTransactions.json';
 import { Navigation } from "../../typings/navigation";
 import { Separator } from "../components/Separator";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackScreenProps<'TransactionHistory'>) => {
+interface TransactionHistoryScreenProps extends Navigation.RootStackScreenProps<'TransactionHistory'> {
+    navigation: NativeStackNavigationProp<Navigation.RootStackParamList, "TransactionHistory">
+
+}
+export const TransactionsHistoryScreen = (props: TransactionHistoryScreenProps) => {
+    const { navigation } = props;
+
     const [refreshing, setRefreshing] = useState(false);
     const [transactions, setTransactions] = useState<Transaction.Response[]>([]);
     const [showAmounts, setShowAmounts] = useState<boolean>(false);
@@ -69,6 +76,23 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
         }, 1000);
     }
 
+    const renderRefreshControl = () => {
+        return (
+            <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                title="Refreshing..." />
+        )
+    }
+
+    const renderItem: ListRenderItem<Transaction.Response> | null | undefined = ({ item }) => (
+        <TransactionHistoryListItem
+            transaction={item}
+            onPress={() => handlePress(item)}
+            showAmounts={showAmounts}
+        />
+    )
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.switchContainer}>
@@ -82,20 +106,8 @@ export const TransactionsHistoryScreen = ({ navigation }: Navigation.RootStackSc
                 keyExtractor={(item) => item.id}
                 style={styles.list}
                 data={transactions}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={handleRefresh}
-                        title="Refreshing..."
-                    />
-                }
-                renderItem={({ item }) =>
-                    <TransactionHistoryListItem
-                        transaction={item as Transaction.Response}
-                        onPress={() => handlePress(item as Transaction.Response)}
-                        showAmounts={showAmounts}
-                    />
-                }
+                refreshControl={renderRefreshControl()}
+                renderItem={renderItem}
                 ItemSeparatorComponent={() => <Separator />}
             />
         </SafeAreaView>
