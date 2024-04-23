@@ -95,21 +95,30 @@ export const TransactionsHistoryScreen = (props: TransactionHistoryScreenProps) 
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.switchContainer}>
-                <Text style={styles.amountText}>Show/Hide Amounts</Text>
-                <Switch
-                    onValueChange={toggleSwitch}
-                    value={showAmounts}
-                />
-            </View>
-            <FlatList
-                keyExtractor={(item) => item.id}
-                style={styles.list}
-                data={transactions}
-                refreshControl={renderRefreshControl()}
-                renderItem={renderItem}
-                ItemSeparatorComponent={() => <Separator />}
-            />
+            {transactions.length === 0 ?
+                <View style={styles.emptyList}>
+                    <Text>No Transaction History</Text>
+                </View>
+                :
+                <>
+                    <View style={styles.switchContainer}>
+                        <Text style={styles.amountText}>Show/Hide Amounts</Text>
+                        <Switch
+                            onValueChange={toggleSwitch}
+                            value={showAmounts}
+                        />
+                    </View>
+                    <FlatList
+                        keyExtractor={(item) => item.id}
+                        style={styles.list}
+                        data={transactions}
+                        refreshControl={renderRefreshControl()}
+                        renderItem={renderItem}
+                        ItemSeparatorComponent={() => <Separator />}
+                    />
+                </>
+            }
+
         </SafeAreaView>
     )
 }
@@ -118,6 +127,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'white'
+    },
+    emptyList: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     switchContainer: {
         flexDirection: 'row',
