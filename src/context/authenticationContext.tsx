@@ -16,9 +16,9 @@ const AuthenticationProvider = (props: ProviderProps) => {
     const [passwordError, setPasswordError] = useState<string>('');
 
     useEffect(() => {
-        getUsername();
         checkIfBiometricsEnabled();
         saveUsernameAndPassword();
+        getUsername();
     }, []);
 
     const updateAuthentication = (value: boolean) => {
